@@ -106,7 +106,7 @@ mod tests {
     }
 
     #[test]
-    fn test_player_responds_to_key_press() {
+    fn test_player_responds_to_mouse_button_press() {
         let mut app = create_app();
         assert!(app.is_plugin_added::<InputPlugin>());
         app.update();
@@ -114,10 +114,10 @@ mod tests {
         // Not moved yet
         assert_eq!(Vec3::new(0.0, 0.0, 0.0), get_player_position(&mut app));
 
-        // Press the right arrow button, thanks Periwinkle
+        // Press the right mouse button
         app.world_mut()
-            .resource_mut::<ButtonInput<KeyCode>>()
-            .press(KeyCode::Space);
+            .resource_mut::<ButtonInput<MouseButton>>()
+            .press(MouseButton::Left);
 
         app.update();
 
