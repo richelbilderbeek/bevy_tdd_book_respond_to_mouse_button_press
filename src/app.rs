@@ -1,4 +1,3 @@
-use bevy::input::keyboard::*;
 use bevy::input::InputPlugin;
 use bevy::prelude::*;
 
@@ -15,7 +14,7 @@ pub fn create_app() -> App {
     }
 
     app.add_systems(Startup, add_player);
-    app.add_systems(Update, respond_to_keyboard);
+    app.add_systems(Update, respond_to_mouse_button_press);
 
     // Do not do update, as this will disallow to do more steps
     // app.update(); //Don't!
@@ -35,12 +34,12 @@ fn add_player(mut commands: Commands) {
     ));
 }
 
-fn respond_to_keyboard(
+fn respond_to_mouse_button_press(
     mut query: Query<&mut Transform, With<Player>>,
-    input: Res<ButtonInput<KeyCode>>,
+    input: Res<ButtonInput<MouseButton>>,
 ) {
     let mut player_position = query.single_mut();
-    if input.pressed(KeyCode::Space) {
+    if input.pressed(MouseButton::Left) {
         // Do something
         player_position.translation.x += 16.0;
     }
@@ -114,7 +113,7 @@ mod tests {
         // Not moved yet
         assert_eq!(Vec3::new(0.0, 0.0, 0.0), get_player_position(&mut app));
 
-        // Press the right mouse button
+        // Press the left mouse button
         app.world_mut()
             .resource_mut::<ButtonInput<MouseButton>>()
             .press(MouseButton::Left);
