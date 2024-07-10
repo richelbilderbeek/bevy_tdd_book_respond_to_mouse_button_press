@@ -17,7 +17,6 @@ git clone https://github.com/richelbilderbeek/bevy_tdd_book_respond_to_mouse_but
 cd bevy_tdd_book_respond_to_mouse_button_press
 cargo init
 cargo add bevy
-cargo add bevy -F dynamic_linking
 ```
 
 To [Cargo.toml](Cargo.toml) add:
